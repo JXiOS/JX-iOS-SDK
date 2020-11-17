@@ -1,0 +1,6 @@
+framework module JXIntercomSDK {
+  umbrella header "JXIntercomSDK.h"
+
+  export *
+  module * { export * }
+}
