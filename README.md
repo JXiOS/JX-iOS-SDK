@@ -69,7 +69,7 @@
 
 
 ## 结构
-
+![](https://github.com/JXiOS/JX-iOS-SDK/blob/main/asdk.png)
 
 
 ## 初始化[JXManager]
