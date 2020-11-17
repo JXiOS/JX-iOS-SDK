@@ -1,19 +1,19 @@
 ## 概要介绍
 
-慧管家 SDK 为 iOS 应用开发者提供了较为简洁的 API, 方便快速集成慧管家功能, SDK 兼容 iOS10.0, Demo 兼容 iOS10.0.
+慧管家 SDK 兼容 iOS10.0, Demo 兼容 iOS10.0.
 
-
+## 结构
 
 `JXManager` 是整个 SDK 功能的管理类, 其中可以进行家庭管理, 设备管理, 通话管理, 历史记录查询, 安防设置等相关功能, 具体可以查看注释.
 
 `JXManagerConfig` 是 SDK 的配置文件, 相关参数可在 SDK 启动之前进行配置
 
+![](https://github.com/JXiOS/JX-iOS-SDK/blob/main/asdk.png)
 
 
 **特别注意:**
 
 `homeId` 是表示设备的唯一值, 长度必须是 8 的倍数, 不足的要后面加0补足之后才可以使用.
-
 
 
 ## 手动集成
@@ -66,10 +66,6 @@
 
 具体可以参照 Demo 中.
 
-
-
-## 结构
-![](https://github.com/JXiOS/JX-iOS-SDK/blob/main/asdk.png)
 
 
 ## 初始化[JXManager]
