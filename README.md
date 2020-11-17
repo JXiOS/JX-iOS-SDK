@@ -77,9 +77,9 @@
 在使用门禁功能之前完成 `JXManager` 的初始化, 最主要的是配置慧管家系统的两个服务器地址, 在使用 SDK 任何方法之前，都应该首先调用初始化方法。
 
 ```objective-c
-	/// 配置两个服务器地址
-    JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务器地址" transitURLString:@"中转服务器地址"];
-    [[JXManager defaultManage] startWithConfig:jxConfig];
+/// 配置两个服务器地址
+JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务器地址" transitURLString:@"中转服务器地址"];
+[[JXManager defaultManage] startWithConfig:jxConfig];
 ```
 
 
