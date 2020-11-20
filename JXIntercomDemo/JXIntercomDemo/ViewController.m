@@ -36,6 +36,7 @@
     
     self.versionLabel.text = [NSString stringWithFormat:@"SDK Version: %@", [JXManager version]];
     
+    // 这里的参数需要填写
 //    self.systemIdTF.text = @"xxx";
 //    self.nameTF.text = @"xxx";
 //    self.snTF.text = @"xxx";

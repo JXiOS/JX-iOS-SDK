@@ -155,6 +155,12 @@ JXIntercomDelegate>
         make.height.mas_equalTo(leftL.mas_height);
     }];
     
+    /// 这里可以填写可用的 homeId 参数, 注意:一定是 8 位或者 8 位的倍数,不足的后面补 0
+    /**
+     例如 123456 这样的就不合法, 必须是 12345600 这样的才可以
+     */
+    self.homeIdTF.text = @"xxxxxxxx";
+    
     self.startButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [self.startButton setTitle:@"Start Server" forState:UIControlStateNormal];
     [self.view addSubview:self.startButton];
