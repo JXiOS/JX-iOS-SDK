@@ -79,12 +79,18 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务�
 ```
 
 
-
-推送需要自行配置推送的 ID, 需要在启动服务之前配置好此参数
+## 关于推送
+根据集成的推送服务, 在启动JXManager服务之前配置好接收推送的 id.
 
 ```objective-c
 // 这个方法必须在添加家庭之前配置好, 否则会收不到推送
 [[JXManager defaultManage] deployAPNsID:@"推送使用的ID"];
+```
+
+在收到对应的推送之后可以直接将对应的Json字符串转成 NSDictionary 提交给 JXManager 处理:
+```objective-c
+/// Json 转成字典后应该有 key = "message" 的键值对
+[[JXManager defaultManage] receivePushNoti:@"Json 转成的字典"];
 ```
 
 
