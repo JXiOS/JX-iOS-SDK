@@ -86,8 +86,6 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务�
 ### 关于推送
 
 客户自己选择 APNS 服务的集成商, 在调用 `startHome:` 之前配置好接收推送所使用的 id,
-
-推送需要自行配置推送的 ID, 需要在启动服务之前配置好此参数
 ```objective-c
 // 这个方法必须在startHome: 调用之前处理, 否则会收不到推送
 [[JXManager defaultManage] deployAPNsID:@"推送使用的ID"];
