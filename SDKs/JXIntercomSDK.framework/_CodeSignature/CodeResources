@@ -10,11 +10,11 @@
 		</data>
 		<key>Headers/JXConnectingManager.h</key>
 		<data>
-		XZhaIrl0VU9ligQPlfAwKv6lzIU=
+		nC1y2ofoOMGeuPWe+yxgsV5kxtQ=
 		</data>
 		<key>Headers/JXDeviceManager.h</key>
 		<data>
-		MLj6fHr3xfnMC5SBVOInYCnHG44=
+		lZULI3tKkbH2uRrh5w/Ytx3KNLY=
 		</data>
 		<key>Headers/JXDoorDeviceModel.h</key>
 		<data>
@@ -38,11 +38,11 @@
 		</data>
 		<key>Headers/JXManager.h</key>
 		<data>
-		+xZSfwNWMqXQdQvK+uNiEzV2VhE=
+		aJlAPk9980bGymsE2dl6KCFFOSY=
 		</data>
 		<key>Headers/JXManagerConfig.h</key>
 		<data>
-		ltTpnxbInsHxsDQbCF38LgP9qwI=
+		lRMvVd/87VqEmzi48nDkB45nv9M=
 		</data>
 		<key>Headers/JXPicRecordModel.h</key>
 		<data>
@@ -50,7 +50,7 @@
 		</data>
 		<key>Headers/JXSecurityManager.h</key>
 		<data>
-		tA1diVf+mQGdkt+4K0qMynI6GYE=
+		3JabY7lOfRyPDFXV+DZKi9T0CXY=
 		</data>
 		<key>Headers/JXVideoRecordModel.h</key>
 		<data>
@@ -62,7 +62,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		zkYjKF5B9j2vuSisTbfTa5KzE/w=
+		OmMnCQl+YfbTFcv/V0MXC3phYzA=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -86,22 +86,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			XZhaIrl0VU9ligQPlfAwKv6lzIU=
+			nC1y2ofoOMGeuPWe+yxgsV5kxtQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			KJdJBkrMLw1Eu31L2+zqTt+ZXOGgPn1DtSpWRcUTss8=
+			216Ferqkr23zF1hure/8hWkz0zIZx87FhCKlVUAcSOk=
 			</data>
 		</dict>
 		<key>Headers/JXDeviceManager.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			MLj6fHr3xfnMC5SBVOInYCnHG44=
+			lZULI3tKkbH2uRrh5w/Ytx3KNLY=
 			</data>
 			<key>hash2</key>
 			<data>
-			WWlStfmFXnzvlEdzX2IZmk/u2PISCwZ1O8GU1+cHk6g=
+			Y1RAc18N6U9aXkPQJMVbUjkK+Hjau+JjCOiyfssTIQ4=
 			</data>
 		</dict>
 		<key>Headers/JXDoorDeviceModel.h</key>
@@ -163,22 +163,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			+xZSfwNWMqXQdQvK+uNiEzV2VhE=
+			aJlAPk9980bGymsE2dl6KCFFOSY=
 			</data>
 			<key>hash2</key>
 			<data>
-			08S4RqXukyLSuhIlre3ST35Vgwn+l3P0BOe/9pKtqlI=
+			9JyaD4pkX75Yx5VbtvFVRLNT2zQw1iyvszKLgeVbTYY=
 			</data>
 		</dict>
 		<key>Headers/JXManagerConfig.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ltTpnxbInsHxsDQbCF38LgP9qwI=
+			lRMvVd/87VqEmzi48nDkB45nv9M=
 			</data>
 			<key>hash2</key>
 			<data>
-			vg0x9V4JF4bhgthjw8yIRqG5WWpGnUlituGWUqzXGpY=
+			mvtY9CpVhODCZVHDC0eRQL5Mw2RImPAMLllLHfDkfEU=
 			</data>
 		</dict>
 		<key>Headers/JXPicRecordModel.h</key>
@@ -196,11 +196,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			tA1diVf+mQGdkt+4K0qMynI6GYE=
+			3JabY7lOfRyPDFXV+DZKi9T0CXY=
 			</data>
 			<key>hash2</key>
 			<data>
-			eKy4Rjjl5CJ+8qjDUp6hl7JXhSt/HsnTuHnX1ONDG0c=
+			7aHUF1hlTP3enGAJlhNhQoizxxzmpqjm98uD9bnGUHA=
 			</data>
 		</dict>
 		<key>Headers/JXVideoRecordModel.h</key>

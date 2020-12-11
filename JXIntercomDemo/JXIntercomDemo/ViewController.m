@@ -17,10 +17,12 @@
 @interface ViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
-@property (weak, nonatomic) IBOutlet UITextField *systemIdTF;
-@property (weak, nonatomic) IBOutlet UITextField *nameTF;
-@property (weak, nonatomic) IBOutlet UITextField *snTF;
-@property (weak, nonatomic) IBOutlet UITextField *buttonKeyTF;
+
+@property (weak, nonatomic) IBOutlet UITextField *userTF;
+
+@property (weak, nonatomic) IBOutlet UITextField *aliasTF;
+
+
 
 @property (nonatomic, assign) BOOL isLogin;
 
@@ -37,10 +39,8 @@
     self.versionLabel.text = [NSString stringWithFormat:@"SDK Version: %@", [JXManager version]];
     
     // 这里的参数需要填写
-//    self.systemIdTF.text = @"xxx";
-//    self.nameTF.text = @"xxx";
-//    self.snTF.text = @"xxx";
-//    self.buttonKeyTF.text = @"xxx";
+//    self.userIdTF.text = @"xxx";
+//    self.aliasTF.text = @"xxx";
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -53,12 +53,10 @@
 - (IBAction)loginAction:(UIButton *)sender {
     
     if (self.isLogin == NO) {
-        NSString *systemId = self.systemIdTF.text;
-        NSString *myName = self.nameTF.text;
-        NSString *mySn = self.snTF.text;
-        NSString *buttonKey = self.buttonKeyTF.text;
+        NSString *userId = self.userTF.text;
+        NSString *alias = self.aliasTF.text;
         
-        [[JXManager defaultManage] loginWithSystemId:systemId buttonKey:buttonKey myName:myName mySn:mySn];
+        [[JXManager defaultManage] loginWithUserId:userId alias:alias];
 
         JXListViewController *listVC = [[JXListViewController alloc] init];
         [self.navigationController pushViewController:listVC animated:YES];

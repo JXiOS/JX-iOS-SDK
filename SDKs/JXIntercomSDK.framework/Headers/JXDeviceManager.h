@@ -63,27 +63,11 @@ NS_ASSUME_NONNULL_BEGIN
                          sessionId:(NSString *)sessionId
                             isStop:(BOOL)isStop;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/// 外部不需要调用的方法
-- (void)loginWithIntercomManager:(IntercomManager *)intercomManager;
-
-- (void)logoutClear;
-
+/// 远程开门
+/// @param homeId 家庭参数
+/// @param deviceName JXDoorDeviceModel.subDeviceName
+- (BOOL)openDoor:(NSString *)homeId
+      deviceName:(NSString *)deviceName;
 
 @end
 

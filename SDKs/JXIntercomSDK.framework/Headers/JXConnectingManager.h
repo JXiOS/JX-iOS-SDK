@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol JXConnectingDelegate <NSObject>
 
 @optional
-/// 视频连接被挂断
+/// 通话连接被挂断
 - (void)didHangUpWithReason:(JX_IntercomReason)reason animated:(BOOL)animated;
 
 /// 通话被对方接听
@@ -64,6 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @interface JXConnectingManager : NSObject<IntercomConversationDelegate>
+
 
 /// 是否支持室内通通话
 - (BOOL)isSupportExtInHome:(NSString *)homeId;
@@ -165,12 +166,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 
-/// 外部不需要的方法
-- (void)loginWithIntercomManager:(IntercomManager *)intercomManager;
 
-- (void)logoutClear;
-
-- (void)deviceOffLineHangupWithRouter:(Router)router clientId:(NSString *)clientId;
 
 @end
 

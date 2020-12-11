@@ -33,8 +33,10 @@ JXSecurityDelegate>
 
 @property (nonatomic, strong) NSMutableArray<JXDoorDeviceModel *> *nvrDevices;
 
-
 @property (nonatomic, strong) NSMutableArray<JXCallRecordModel *> *historyArray;
+
+@property (nonatomic, strong) UIButton *openDoorBtn;
+@property (nonatomic, assign) BOOL canOpenDoor;
 
 @end
 
@@ -91,7 +93,20 @@ JXSecurityDelegate>
         _tableView.sectionHeaderHeight = tableViewRowHeight;
         
         UIView *tableFooterView = [[UIView alloc] init];
+        tableFooterView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 40);
         tableFooterView.backgroundColor = tableViewBgColor;
+        
+        self.openDoorBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+        [self.openDoorBtn setTitle:@"远程开锁" forState:UIControlStateNormal];
+        [tableFooterView addSubview:self.openDoorBtn];
+        [self.openDoorBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(0);
+            make.centerY.mas_equalTo(0);
+            make.width.mas_equalTo(100);
+            make.height.mas_equalTo(30);
+        }];
+        [self.openDoorBtn addTarget:self action:@selector(openDoor:) forControlEvents:UIControlEventTouchUpInside];
+        self.openDoorBtn.hidden = !self.canOpenDoor;
         _tableView.tableFooterView = tableFooterView;
         
         if (@available(iOS 11.0, *)) {
@@ -293,6 +308,15 @@ JXSecurityDelegate>
         if (tmpDoorDevice.deviceType == JX_DeviceType_NVRIPCCamera) {
             [self.nvrDevices addObject:tmpDoorDevice];
         }
+        
+        /// 展示开门
+        if (tmpDoorDevice.canOpenDoor == YES) {
+            self.canOpenDoor = YES;
+            
+            if (self.openDoorBtn) {
+                self.openDoorBtn.hidden = !self.canOpenDoor;
+            }
+        }
     }
     
     [self.historyArray addObjectsFromArray:[[JXManager defaultManage].historyManager getRecordsInHome:self.homeId]];
@@ -436,9 +460,17 @@ JXSecurityDelegate>
         if (tmpDoorDevice.deviceType == JX_DeviceType_NVRIPCCamera) {
             [self.nvrDevices addObject:tmpDoorDevice];
         }
+        
+        if (tmpDoorDevice.canOpenDoor == YES) {
+            self.canOpenDoor = YES;
+        }
     }
     
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    if (self.openDoorBtn) {
+        self.openDoorBtn.hidden = !self.canOpenDoor;
+    }
 }
 
 /// 室内通列表改变
@@ -448,6 +480,30 @@ JXSecurityDelegate>
     [self.extDevices addObjectsFromArray:[[JXManager defaultManage].deviceManager getExtDeviceInHome:self.homeId]];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
+
+
+
+
+
+- (void)openDoor:(UIButton *)button
+{
+    button.enabled = NO;
+    
+    for (JXDoorDeviceModel *tmpDoorDevice in self.doorDevices) {
+        // 开门
+        if (tmpDoorDevice.canOpenDoor == YES) {
+            NSLog(@"开门!");
+            [[JXManager defaultManage].deviceManager openDoor:self.homeId deviceName:tmpDoorDevice.subDeviceName];
+        }
+    }
+    
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        button.enabled = YES;
+    });
+}
+
+
 
 
 @end

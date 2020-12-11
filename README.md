@@ -70,20 +70,31 @@
 
 ## 初始化[JXManager]
 
-在使用门禁功能之前完成 `JXManager` 的初始化, 最主要的是配置慧管家系统的两个服务器地址, 在使用 SDK 任何方法之前，都应该首先调用初始化方法。
+在使用门禁功能之前需要先将配置项设置好: 
 
 ```objective-c
-/// 配置两个服务器地址
-JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务器地址" transitURLString:@"中转服务器地址"];
+JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务器地址" transitURLString:@"中转服务器地址" channel:@"客户标识"];
+```
+
+然后启动 `JXMananger` :
+
+```objective-c
 [[JXManager defaultManage] startWithConfig:jxConfig];
 ```
 
 
+
 ## 关于推送
 根据集成的推送服务, 在启动JXManager服务之前配置好接收推送的 id.
+=======
 
+### 关于推送
+
+客户自己选择 APNS 服务的集成商, 在调用 `startHome:` 之前配置好接收推送的 id,
+
+推送需要自行配置推送的 ID, 需要在启动服务之前配置好此参数
 ```objective-c
-// 这个方法必须在添加家庭之前配置好, 否则会收不到推送
+// 这个方法必须在startHome: 调用之前处理, 否则会收不到推送
 [[JXManager defaultManage] deployAPNsID:@"推送使用的ID"];
 ```
 
@@ -99,14 +110,10 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务�
 
 ```objective-c
 /// 登录
-/// @param systemId 唯一标识
-/// @param buttonKey 也是唯一标识,可以用用户的 id
-/// @param myName 用来展示的名字
-/// @param mySn 移动端可传入代表账号的参数
-- (void)loginWithSystemId:(nonnull NSString *)systemId
-                buttonKey:(nonnull NSString *)buttonKey
-                   myName:(nonnull NSString *)myName
-                     mySn:(nonnull NSString *)mySn;
+/// @param userId 移动端的账号,代表移动端的唯一值
+/// @param alias 用来显示的昵称
+- (void)loginWithUserId:(NSString *)userId
+                  alias:(NSString *)alias;
 
 /// 登出
 - (void)logout;
@@ -133,9 +140,7 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务�
 
 
 
-## 门禁设备和室内通设备查看[JXConnectingManager]
-
-### 主动呼叫
+## 设备的查看[JXConnectingManager]
 
 通过 `[[JXManager defaultManage].deviceManager` 来处理
 
@@ -160,7 +165,25 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务�
 
 
 
+### 远程开门
+
+通过 `getDoorDeviceInHome:` 方法获取到门禁设备后, 判断 `JXDoorDeviceModel` 的 `canOpenDoor` 属性来确认是否支持远程开门.
+
+```objective-c
+/// 远程开门
+/// @param homeId 家庭参数
+/// @param deviceName JXDoorDeviceModel.subDeviceName
+- (BOOL)openDoor:(NSString *)homeId
+      deviceName:(NSString *)deviceName;
+```
+
+
+
+
+
 ## 呼叫和查看监控
+
+### 主动呼叫
 
 通过 `[[JXManager defaultManage].connectingManager` 可以处理主动呼出的情况,
 
@@ -288,8 +311,6 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务�
 
 
 
-
-
 ## 历史记录
 
 所有的呼叫都会自动保存到记录中, 通过 `[[JXManager defaultManage].historyManager` 来获取
@@ -341,6 +362,7 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务�
 ```objective-c
 /// 设置安防监听
 - (void)addSecurityDelegate:(id<JXSecurityDelegate>)holder;
+
 /// 移除安防监听
 - (void)removeSecurityDelegate:(id<JXSecurityDelegate>)holder;
 

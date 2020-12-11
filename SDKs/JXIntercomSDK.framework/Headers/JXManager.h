@@ -65,22 +65,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// 通话相关
 @property (nonatomic, strong, readonly) JXConnectingManager *connectingManager;
 
-
 /// App 启动的时候启动服务
 - (void)startWithConfig:(JXManagerConfig *)config;
 
-/// 配置推送的 ID
+/// 配置推送的 ID, 在 startWithConfig 之后再配置
 - (void)deployAPNsID:(NSString *)pushId;
 
 /// 登录
-/// @param systemId 唯一标识
-/// @param buttonKey 也是唯一标识,可以用用户的 id
-/// @param myName 用来展示的名字
-/// @param mySn 移动端可传入代表账号的参数
-- (void)loginWithSystemId:(nonnull NSString *)systemId
-                buttonKey:(nonnull NSString *)buttonKey
-                   myName:(nonnull NSString *)myName
-                     mySn:(nonnull NSString *)mySn;
+/// @param userId 移动端的账号,代表移动端的唯一值
+/// @param alias 用来显示的昵称
+- (void)loginWithUserId:(NSString *)userId
+                  alias:(NSString *)alias;
+
 
 /// 退出账号的时候必须调用
 - (void)logout;

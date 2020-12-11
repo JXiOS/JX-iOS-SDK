@@ -63,22 +63,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 关闭安防报警
 - (void)cancelSecurityWarning:(NSString *)homeId;
 
-
-
-
-
-
-
-
-
-
-
-
-/// 外部不需要调用的方法
-- (void)loginWithIntercomManager:(IntercomManager *)intercomManager;
-
-- (void)logoutClear;
-
 @end
 
 NS_ASSUME_NONNULL_END
