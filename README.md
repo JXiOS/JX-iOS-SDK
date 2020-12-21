@@ -11,9 +11,6 @@
 ![](https://github.com/JXiOS/JX-iOS-SDK/blob/main/asdk.png)
 
 
-**特别注意:**
-
-`homeId` 是表示设备的唯一值, 长度必须是 8 的倍数, 不足的要后面加0补足之后才可以使用.
 
 
 ## 手动集成
@@ -99,14 +96,16 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务�
 
 
 
-## 登录和登出 [JXManager]
+## 登录和登出
 
 ```objective-c
 /// 登录
 /// @param userId 移动端的账号,代表移动端的唯一值
-/// @param alias 用来显示的昵称
+/// @param alias 用来显示的昵称. 传空值则默认为"iPhone"
+/// @param completeBlock 指示登录是否成功. 返回 YES 后才可以正常使用 SDK 中的功能. 不要在 succeed = NO 的时候启动服务.
 - (void)loginWithUserId:(NSString *)userId
-                  alias:(NSString *)alias;
+                  alias:(NSString *)alias
+               complete:(void(^)(BOOL succeed))completeBlock;
 
 /// 登出
 - (void)logout;
@@ -116,7 +115,7 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务�
 
 
 
-## 服务的启动和停用[JXManager]
+## 服务的启动和停用
 
 ```objective-c
 /// 启动服务
@@ -133,7 +132,7 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务�
 
 
 
-## 设备的查看[JXConnectingManager]
+## 设备的查看[JXDeviceManager]
 
 通过 `[[JXManager defaultManage].deviceManager` 来处理
 
@@ -174,7 +173,7 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务�
 
 
 
-## 呼叫和查看监控
+## 呼叫和查看监控[JXConnectingManager]
 
 ### 主动呼叫
 
@@ -183,6 +182,20 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务�
 这里每一个呼叫连接都会拥有一个唯一的 sessionId, 相关方法具体可以查看 demo 
 
 ```objective-c
+/// 是否支持室内通通话
+- (BOOL)isSupportExtInHome:(NSString *)homeId;
+
+/// 呼叫室内通设备, 呼叫成功返回 sessionId, 呼叫失败返回 nil
+/// @param homeId homeId
+/// @param callType 区分是呼叫还是查看监控
+/// @param extDevice 室内通设备
+/// @param delegate 视频连接的代理
+- (NSString * _Nullable)callExtInHome:(NSString *)homeId
+                             callType:(JX_IntercomCallType)callType
+                            extDevice:(JXExtDeviceModel *)extDevice
+                        videoDelegate:(id<JXConnectingDelegate>)delegate;
+
+
 /// 是否支持室内通通话
 - (BOOL)isSupportExtInHome:(NSString *)homeId;
 
@@ -294,6 +307,14 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务�
 - (id<JXConnectingDelegate> _Nullable)calledByExtWithHomeId:(NSString *)homeId
                                                   sessionId:(NSString *)sessionId
                                                   extDevice:(JXExtDeviceModel *)extDevice;
+
+/// 被户户通呼叫 (shouldResponseIntercomCall 返回 YES 的时候才会有)
+/// @param homeId homeId
+/// @param sessionId 会话的 sessionId
+/// @param callNumber 呼叫的房号
+- (id<JXConnectingDelegate> _Nullable)calledByP2PWithHomeId:(NSString *)homeId
+                                                  sessionId:(NSString *)sessionId
+                                                 callNumber:(NSString *)callNumber;
 ```
 
 

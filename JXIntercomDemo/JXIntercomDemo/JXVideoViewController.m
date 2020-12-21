@@ -37,6 +37,8 @@
 
 @property (nonatomic, strong) AVAudioPlayer *player;
 
+@property (nonatomic, copy) NSString *p2pNumber;
+
 @end
 
 @implementation JXVideoViewController
@@ -75,6 +77,21 @@
 }
 
 
+- (instancetype)initWithCallP2P:(NSString *)callNumber
+                         homeId:(NSString *)homeId
+                      isCallout:(BOOL)isCallout
+{
+    if (self = [super init]) {
+        self.p2pNumber = callNumber;
+        self.homeId = homeId;
+        self.isCallout = isCallout;
+        self.callType = JX_IntercomCallType_Call;
+        self.callScenes = JX_IntercomScenes_P2P;
+    }
+    return self;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -104,8 +121,6 @@
 
 - (void)call
 {
-//    [self playMusic];
-    
     if (self.isCallout) {
         if (self.callScenes == JX_IntercomScenes_Door && self.callType == JX_IntercomCallType_Monitor) {
             NSString *sessionId = [[JXManager defaultManage].connectingManager callDoorMonitorInHome:self.homeId device:self.doorDevice videoDelegate:self];
@@ -121,9 +136,23 @@
             NSString *sessionId = [[JXManager defaultManage].connectingManager callExtInHome:self.homeId callType:self.callType extDevice:self.extDevice videoDelegate:self];
             if (sessionId) {
                 self.sessionId = sessionId;
+                
+                [self playMusic];
             }
             else {
                 NSLog(@"室内通 呼叫出错!");
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+        }
+        else if (self.callScenes == JX_IntercomScenes_P2P) {
+            NSString *sessionId = [[JXManager defaultManage].connectingManager callP2POutWithHomeId:self.homeId callNumber:self.p2pNumber videoDelegate:self];
+            if (sessionId) {
+                self.sessionId = sessionId;
+                
+                [self playMusic];
+            }
+            else {
+                NSLog(@"呼叫户户通 出错!");
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
         }
@@ -158,6 +187,7 @@
 - (void)configSubviews
 {
     CGFloat sw = [UIScreen mainScreen].bounds.size.width;
+    CGFloat sh = [UIScreen mainScreen].bounds.size.height;
     
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.textColor = [UIColor whiteColor];
@@ -183,7 +213,7 @@
     self.layer = [CATiledLayer layer];
     [self.layerView.layer addSublayer:self.layer];
     self.layer.frame = CGRectMake(0, 0, sw, layerH);
-    self.layer.backgroundColor = [UIColor whiteColor].CGColor;
+    self.layer.backgroundColor = [UIColor blackColor].CGColor;
     
     self.mineLayerView = [[UIView alloc] init];
     self.mineLayerView.backgroundColor = [UIColor greenColor];
@@ -191,13 +221,13 @@
     [self.mineLayerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(titleLabel.mas_bottom).offset(20);
         make.right.mas_equalTo(@-10);
-        make.width.mas_equalTo(@90);
-        make.height.mas_equalTo(@120);
+        make.width.mas_equalTo(@120);
+        make.height.mas_equalTo(@90);
     }];
     
     self.mineLayer = [CATiledLayer layer];
     [self.mineLayerView.layer addSublayer:self.mineLayer];
-    self.mineLayer.frame = CGRectMake(0, 0, 90, 120);
+    self.mineLayer.frame = CGRectMake(0, 0, 120, 90);
     self.mineLayer.backgroundColor = [UIColor redColor].CGColor;
     
     [self configBottomView];
@@ -479,10 +509,20 @@
 
 - (BOOL)isFullScreen
 {
-    return (CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(375, 812)) ||
-            CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(812, 375)) ||
-            CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(414, 896)) ||
-            CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(896, 414)));
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        
+        CGSize size = [UIScreen mainScreen].bounds.size;
+        NSInteger notchValue = size.width / size.height * 100;
+        
+        if (216 == notchValue || 46 == notchValue) {
+            return YES;
+        }
+        
+        return NO;
+    }
+    else {
+        return NO;
+    }
 }
 
 @end

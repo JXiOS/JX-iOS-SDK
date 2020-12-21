@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/JXConnectingManager.h</key>
 		<data>
-		nC1y2ofoOMGeuPWe+yxgsV5kxtQ=
+		gnSLDvZOW20jPnvwlhajuwQfknU=
 		</data>
 		<key>Headers/JXDeviceManager.h</key>
 		<data>
@@ -18,11 +18,11 @@
 		</data>
 		<key>Headers/JXDoorDeviceModel.h</key>
 		<data>
-		kba1CYiKHogVlDP/Kf/xP1xi640=
+		0wlkUb1QciKEfO1T+zTH1rbyssA=
 		</data>
 		<key>Headers/JXExtDeviceModel.h</key>
 		<data>
-		xB1l9NsaETrQWO0rf4MGQeaQQX8=
+		uk9ya38RecUksNJH62R00gTuvLE=
 		</data>
 		<key>Headers/JXHistoryManager.h</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>Headers/JXIntercomConstants.h</key>
 		<data>
-		TpRr6LaisnWSySmxzzxtxWxCrv4=
+		vRxdCvycrT0MAJhGUmvD7QhpRMQ=
 		</data>
 		<key>Headers/JXIntercomSDK.h</key>
 		<data>
@@ -38,7 +38,7 @@
 		</data>
 		<key>Headers/JXManager.h</key>
 		<data>
-		aJlAPk9980bGymsE2dl6KCFFOSY=
+		yT3GjP/zXs+8JuICGBvOt0O21yM=
 		</data>
 		<key>Headers/JXManagerConfig.h</key>
 		<data>
@@ -46,7 +46,7 @@
 		</data>
 		<key>Headers/JXPicRecordModel.h</key>
 		<data>
-		NYu8ZHueq4bzRld0pY7ql9+n05k=
+		LEYvt0ItbELZyaQzt+Wuj6ru39g=
 		</data>
 		<key>Headers/JXSecurityManager.h</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Headers/JXVideoRecordModel.h</key>
 		<data>
-		U8KB7S7p51++ELIWa+Vmp+hwfEc=
+		QsW2IfvohXTJOwBZTKYangDvgiA=
 		</data>
 		<key>Headers/JX_GDataObjectProtocol.h</key>
 		<data>
@@ -86,11 +86,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			nC1y2ofoOMGeuPWe+yxgsV5kxtQ=
+			gnSLDvZOW20jPnvwlhajuwQfknU=
 			</data>
 			<key>hash2</key>
 			<data>
-			216Ferqkr23zF1hure/8hWkz0zIZx87FhCKlVUAcSOk=
+			btZVQZObNQJ57PrDEPpFxUu7D/6lBmUdu/zQC32prCg=
 			</data>
 		</dict>
 		<key>Headers/JXDeviceManager.h</key>
@@ -108,22 +108,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			kba1CYiKHogVlDP/Kf/xP1xi640=
+			0wlkUb1QciKEfO1T+zTH1rbyssA=
 			</data>
 			<key>hash2</key>
 			<data>
-			wciI9xmhtP3mw95XmEBta3sJBr4Hquw251Q8XEppmho=
+			bXQ/4LMzsWODEPv38Uaj2oP/4bdRltOPQGi29Aah/eo=
 			</data>
 		</dict>
 		<key>Headers/JXExtDeviceModel.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			xB1l9NsaETrQWO0rf4MGQeaQQX8=
+			uk9ya38RecUksNJH62R00gTuvLE=
 			</data>
 			<key>hash2</key>
 			<data>
-			PYyFIGabphsq8tleItJ5OTjv0pTcjEFQCwMj2t32jus=
+			5BD2C1dCRXnxFhY/4X6dVRyJjLYft7ebiJezkptk9Y4=
 			</data>
 		</dict>
 		<key>Headers/JXHistoryManager.h</key>
@@ -141,11 +141,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			TpRr6LaisnWSySmxzzxtxWxCrv4=
+			vRxdCvycrT0MAJhGUmvD7QhpRMQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			HGy6bvSoqtzqlEO3A+9yIcrq84DLXmxsRJKfsmAydo8=
+			0E+t/AFntN6O+G4EK1PKJ/rJRzKr1RqkOXFU2jMjQw0=
 			</data>
 		</dict>
 		<key>Headers/JXIntercomSDK.h</key>
@@ -163,11 +163,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			aJlAPk9980bGymsE2dl6KCFFOSY=
+			yT3GjP/zXs+8JuICGBvOt0O21yM=
 			</data>
 			<key>hash2</key>
 			<data>
-			9JyaD4pkX75Yx5VbtvFVRLNT2zQw1iyvszKLgeVbTYY=
+			NfxcVH4u8LxogdUxbD05x9LyC2enqJ+qXoj5O8yfLMg=
 			</data>
 		</dict>
 		<key>Headers/JXManagerConfig.h</key>
@@ -185,11 +185,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			NYu8ZHueq4bzRld0pY7ql9+n05k=
+			LEYvt0ItbELZyaQzt+Wuj6ru39g=
 			</data>
 			<key>hash2</key>
 			<data>
-			OMt/DhDQLKRY0IG5eMaahNaUqsIH3BbGlGsVI8nHRa4=
+			nBWx41oz6i48+Hz+HoKf1YO+PAd3xnzHkF1rSjJuccs=
 			</data>
 		</dict>
 		<key>Headers/JXSecurityManager.h</key>
@@ -207,11 +207,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			U8KB7S7p51++ELIWa+Vmp+hwfEc=
+			QsW2IfvohXTJOwBZTKYangDvgiA=
 			</data>
 			<key>hash2</key>
 			<data>
-			B0eMkguoBJSl1ZzNtMPUhA1O1JolbAj+zsD3lDWK1E4=
+			GXRgBysHk3SzhUI4vllZo8e2RAlqZUBVOS+a8sQn4c4=
 			</data>
 		</dict>
 		<key>Headers/JX_GDataObjectProtocol.h</key>

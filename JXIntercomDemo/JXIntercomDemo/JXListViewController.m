@@ -101,6 +101,7 @@ JXIntercomDelegate>
         
         [[JXManager defaultManage] stopHome:homeId];
         [self.homes removeObject:homeId];
+        [self.tableView reloadData];
     }
 }
 
@@ -244,5 +245,16 @@ JXIntercomDelegate>
     return vc;
 }
 
+
+- (id<JXConnectingDelegate>)calledByP2PWithHomeId:(NSString *)homeId sessionId:(NSString *)sessionId callNumber:(NSString *)callNumber
+{
+    JXVideoViewController *vc = [[JXVideoViewController alloc] initWithCallP2P:callNumber homeId:homeId isCallout:NO];
+    vc.sessionId = sessionId;
+    if (@available(iOS 13.0, *)) {
+        vc.modalPresentationStyle = UIModalPresentationFullScreen;
+    }
+    [self presentViewController:vc animated:YES completion:nil];
+    return vc;
+}
 
 @end

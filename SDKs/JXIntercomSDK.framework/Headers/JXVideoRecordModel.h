@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 视频文件的文件名 e.g. 13203394960184379.rec
 @property (nonatomic, copy, nullable) NSString *recFileName;
 
-/// 通话时长
+/// 通话时长(秒)
 @property (nonatomic, assign) NSInteger durationSecond;
 
 // 初始化

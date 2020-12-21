@@ -20,7 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *showName;
 
-/// LAN-LAN, WAN-PROXY
 @property (nonatomic, assign) Router router;
 
 @property (nonatomic, strong) NetClient *netClient;

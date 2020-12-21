@@ -9,18 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-///// JXIntercom 的状态
-//typedef NS_ENUM(NSInteger, JX_IntercomState) {
-//    /// 空闲
-//    JX_IntercomState_Free = 0,
-//    /// 门禁通话中 (最高优先级, 此时不会接入其他通话)
-//    JX_IntercomState_DoorCall,
-//    /// 室内通呼叫状态 (优先级仅次于门禁通话, 若有门禁呼叫, 会被自动挂断)
-//    JX_IntercomState_ExtCall,
-//    /// 查看监控中 (最弱优先级, 若有门禁或者室内通通话, 会被自动挂断)
-//    JX_IntercomState_Monitor,
-//};
-
+#define JX_DEPRECATED(instead) NS_DEPRECATED_IOS(10_0, 10_0, instead)
 
 typedef NS_ENUM(NSUInteger, IntercomType) {
     /// 带有室内机的情况
@@ -56,7 +45,9 @@ typedef NS_ENUM(NSUInteger, JX_DeviceType) {
     /// 独立的IPC
     JX_DeviceType_IPCCamera,
     /// NVR 连接的 IPC
-    JX_DeviceType_NVRIPCCamera
+    JX_DeviceType_NVRIPCCamera,
+    /// 户户通设备
+    JX_DeviceType_P2P
 };
 
 
@@ -78,7 +69,7 @@ typedef NS_ENUM(NSUInteger, JX_IntercomScenes) {
     JX_IntercomScenes_Door = 0,
     /// 室内通
     JX_IntercomScenes_Ext,
-    /// 户户通(手机端现在没有)
+    /// 户户通
     JX_IntercomScenes_P2P,
 };
 
@@ -104,9 +95,9 @@ typedef NS_ENUM(NSUInteger, JX_IntercomResultType) {
     JX_IntercomResultType_OpFailed,
     /// 参数有误
     JX_IntercomResultType_IncorrectParam,
-    /// SDK 还未登录
+    /// SDK未登录
     JX_IntercomResultType_NoLogin,
-    /// 未找到该家庭
+    /// 该家庭服务未启动
     JX_IntercomResultType_NoHome,
     
 };
@@ -168,12 +159,13 @@ UIKIT_EXTERN NSString * const JX_ExtMessageKey_ClientID;
 UIKIT_EXTERN NSString * const JX_ExtMessageKey_Message;
 UIKIT_EXTERN NSString * const JX_ExtMessageKey_IsMonitor;
 UIKIT_EXTERN NSString * const JX_ExtMessageKey_isHandHangup;
+
 /// NVR 查看记录用
 UIKIT_EXTERN NSString * const JX_NVRMessageKey_Starttime;
 UIKIT_EXTERN NSString * const JX_NVRMessageKey_Endtime;
 UIKIT_EXTERN NSString * const JX_NVRMessageKey_Streamtype;
 
-// 户户通
+/// 户户通
 UIKIT_EXTERN NSString * const JX_NameP2P;
 
 /// 摄像头操作

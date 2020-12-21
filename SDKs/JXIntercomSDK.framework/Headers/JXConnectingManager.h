@@ -65,33 +65,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JXConnectingManager : NSObject<IntercomConversationDelegate>
 
-
-/// 是否支持室内通通话
-- (BOOL)isSupportExtInHome:(NSString *)homeId;
-
-/// 呼叫室内通设备, 呼叫成功返回 sessionId, 呼叫失败返回 nil
-/// @param homeId homeId
-/// @param callType 区分是呼叫还是查看监控
-/// @param extDevice 室内通设备
-/// @param delegate 视频连接的代理
-- (NSString * _Nullable)callExtInHome:(NSString *)homeId
-                             callType:(JX_IntercomCallType)callType
-                            extDevice:(JXExtDeviceModel *)extDevice
-                        videoDelegate:(id<JXConnectingDelegate>)delegate;
-
-/// 查看门禁系统摄像头
-/// @param homeId dockSn
-/// @param doorDevice KRDoorDeviceModel
-/// @param delegate 设置代理
-/// 返回的是通话的 sessionId, 如果是 nil, 表示呼叫失败
-- (NSString * _Nullable)callDoorMonitorInHome:(NSString *)homeId
-                                       device:(JXDoorDeviceModel *)doorDevice
-                                videoDelegate:(id<JXConnectingDelegate>)delegate;
-
-/// 主动接听, 不会有回调
+/// 主动接听 sessionId 对应的会话, 不会有回调
 - (BOOL)pickUpInHome:(NSString *)homeId sessionId:(NSString *)sessionId;
 
-/// 主动挂断, 不会有回调
+/// 主动挂断 sessionId 对应的会话, 不会有回调
 - (void)hangUpInHome:(NSString *)homeId sessionId:(NSString *)sessionId;
 
 /// 主动挂断掉所有的会话
@@ -100,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 开启/禁用 视频
 - (BOOL)enableVideo:(BOOL)enable inHome:(NSString *)homeId sessionId:(NSString *)sessionId;
 
-/// 切换前后镜头: front:YES-前置 NO-后置
+/// 切换前后镜头: front:YES-前置 NO-后置.
 - (BOOL)switchCamera:(BOOL)front;
 
 /// 开启/禁用 麦克风
@@ -109,12 +86,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 开启/禁用 扬声器
 - (BOOL)enableSpeaker:(BOOL)enable inHome:(NSString *)homeId sessionId:(NSString *)sessionId;
 
-/// 新版本开锁, 增加 dtmf 开锁
+/// 通话中开锁
 - (BOOL)unlockInHome:(NSString *)homeId
            sessionId:(NSString *)sessionId
               device:(JXDoorDeviceModel *)device;
 
-/// 获取快照 (保存到相册需要外部自己处理)
+/// 获取会话的快照 (保存到相册需要外部自己处理)
 - (void)takeSnapshotInHome:(NSString *)homeId
                  sessionId:(NSString *)sessionId
              completeBlock:(getSnapshotBlock)completeBlock;
@@ -132,6 +109,49 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updateVideoLayer:(CATiledLayer *)layer sessionId:(NSString *)sessionId homeId:(NSString *)homeId;
 
 
+
+
+#pragma mark ---- 室内通 ----
+/// 是否支持室内通通话
+- (BOOL)isSupportExtInHome:(NSString *)homeId;
+
+/// 呼叫室内通设备, 呼叫成功返回 sessionId, 呼叫失败返回 nil
+/// @param homeId homeId
+/// @param callType 区分是呼叫还是查看监控
+/// @param extDevice 室内通设备
+/// @param delegate 视频连接的代理
+- (NSString * _Nullable)callExtInHome:(NSString *)homeId
+                             callType:(JX_IntercomCallType)callType
+                            extDevice:(JXExtDeviceModel *)extDevice
+                        videoDelegate:(id<JXConnectingDelegate>)delegate;
+
+
+#pragma mark ---- 门禁 ----
+/// 查看门禁系统摄像头
+/// @param homeId homeId
+/// @param doorDevice KRDoorDeviceModel
+/// @param delegate 设置代理
+/// 返回的是通话的 sessionId, 如果是 nil, 表示呼叫失败
+- (NSString * _Nullable)callDoorMonitorInHome:(NSString *)homeId
+                                       device:(JXDoorDeviceModel *)doorDevice
+                                videoDelegate:(id<JXConnectingDelegate>)delegate;
+
+
+#pragma mark ---- 户户通 ----
+/// 是否支持户户通通话
+- (BOOL)isSupportP2PInHome:(NSString *)homeId;
+
+/// 呼叫户户通
+/// @param homeId homeId
+/// @param callNumber 呼叫的房号
+/// @param delegate 会话相关的代理
+/// 返回的是会话的 sessionId, 如果是 nil, 表示呼叫失败.
+- (NSString * _Nullable)callP2POutWithHomeId:(NSString *)homeId
+                                  callNumber:(NSString *)callNumber
+                               videoDelegate:(id<JXConnectingDelegate>)delegate;
+
+
+#pragma mark ---- NVR ----
 /// 查看 NVR 的历史记录, 呼叫成功返回 sessionId, 呼叫失败返回 nil
 /// @param homeId homeId
 /// @param nvrDevice nvr设备, deviceType == JX_DeviceType_NVRIPCCamera

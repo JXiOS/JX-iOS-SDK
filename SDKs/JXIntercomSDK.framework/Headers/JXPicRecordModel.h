@@ -20,8 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *sessionId;
 
 
-
-
 /// 截图的文件名 e.g. 13203394960184379.jpeg
 @property (nonatomic, copy, nullable) NSString *picName;
 /// 文件夹路径:一般是时间戳 e.g. 13203138231365510
@@ -34,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 图片的完整本地路径
 - (NSString * _Nullable)fullImagePath;
 
-/// 创建时间,由 picName 转化而来
+/// 图片的创建时间
 - (NSDate * _Nullable)createDate;
 
 /// 获得图片对象

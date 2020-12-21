@@ -56,13 +56,18 @@
         NSString *userId = self.userTF.text;
         NSString *alias = self.aliasTF.text;
         
-        [[JXManager defaultManage] loginWithUserId:userId alias:alias];
-
-        JXListViewController *listVC = [[JXListViewController alloc] init];
-        [self.navigationController pushViewController:listVC animated:YES];
-        
-        self.isLogin = YES;
-        sender.selected = YES;
+        [[JXManager defaultManage] loginWithUserId:userId alias:alias complete:^(BOOL succeed) {
+            if (succeed) {
+                JXListViewController *listVC = [[JXListViewController alloc] init];
+                [self.navigationController pushViewController:listVC animated:YES];
+                
+                self.isLogin = YES;
+                sender.selected = YES;
+            }
+            else {
+                NSLog(@"SDK 配置出错!");
+            }
+        }];
     }
     else {
         

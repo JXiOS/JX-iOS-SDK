@@ -33,10 +33,15 @@ JXSecurityDelegate>
 
 @property (nonatomic, strong) NSMutableArray<JXDoorDeviceModel *> *nvrDevices;
 
+
 @property (nonatomic, strong) NSMutableArray<JXCallRecordModel *> *historyArray;
 
 @property (nonatomic, strong) UIButton *openDoorBtn;
 @property (nonatomic, assign) BOOL canOpenDoor;
+
+@property (nonatomic, strong) UITextField *p2pNumberTF;
+@property (nonatomic, strong) UIButton *callP2PBtn;
+
 
 @end
 
@@ -92,6 +97,34 @@ JXSecurityDelegate>
         _tableView.rowHeight = tableViewRowHeight;
         _tableView.sectionHeaderHeight = tableViewRowHeight;
         
+        UIView *tableHeaderView = [[UIView alloc] init];
+        tableHeaderView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 60);
+        tableHeaderView.backgroundColor = tableViewBgColor;
+        
+        self.p2pNumberTF = [[UITextField alloc] init];
+        self.p2pNumberTF.placeholder = @"请输入户户通房号";
+        self.p2pNumberTF.textAlignment = NSTextAlignmentCenter;
+        [tableHeaderView addSubview:self.p2pNumberTF];
+        [self.p2pNumberTF mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.right.mas_equalTo(0);
+            make.height.mas_equalTo(30);
+        }];
+        
+        UIButton *callP2pBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+        [callP2pBtn setTitle:@"呼叫户户通" forState:UIControlStateNormal];
+        [callP2pBtn setTitle:@"不支持户户通" forState:UIControlStateDisabled];
+        [callP2pBtn addTarget:self action:@selector(callP2pAction:) forControlEvents:UIControlEventTouchUpInside];
+        [tableHeaderView addSubview:callP2pBtn];
+        [callP2pBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(0);
+            make.height.mas_equalTo(30);
+            make.centerX.mas_equalTo(0);
+            make.width.mas_equalTo(150);
+        }];
+        self.callP2PBtn = callP2pBtn;
+        
+        _tableView.tableHeaderView = tableHeaderView;
+        
         UIView *tableFooterView = [[UIView alloc] init];
         tableFooterView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 40);
         tableFooterView.backgroundColor = tableViewBgColor;
@@ -107,6 +140,7 @@ JXSecurityDelegate>
         }];
         [self.openDoorBtn addTarget:self action:@selector(openDoor:) forControlEvents:UIControlEventTouchUpInside];
         self.openDoorBtn.hidden = !self.canOpenDoor;
+        
         _tableView.tableFooterView = tableFooterView;
         
         if (@available(iOS 11.0, *)) {
@@ -222,6 +256,13 @@ JXSecurityDelegate>
     return cell;
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if ([self.p2pNumberTF isFirstResponder]) {
+        [self.p2pNumberTF resignFirstResponder];
+    }
+}
+
 - (NSString *)securityStatusString
 {
     if (self.isSupportSecurity == NO) {
@@ -325,7 +366,19 @@ JXSecurityDelegate>
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.top.mas_equalTo(@0);
     }];
+    
+    self.callP2PBtn.enabled = [[JXManager defaultManage].connectingManager isSupportP2PInHome:self.homeId];
 }
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    if ([self.p2pNumberTF isFirstResponder]) {
+        [self.p2pNumberTF resignFirstResponder];
+    }
+}
+
 
 - (void)dealloc
 {
@@ -334,6 +387,26 @@ JXSecurityDelegate>
 }
 
 #pragma mark - ======== Actions ========
+
+- (void)callP2pAction:(UIButton *)button
+{
+    NSString *callNumber = self.p2pNumberTF.text;
+    if (callNumber == nil || callNumber.length == 0) {
+        NSLog(@"输入房号");
+        return;
+    }
+    
+    self.callP2PBtn.userInteractionEnabled = NO;
+    
+    JXVideoViewController *vc = [[JXVideoViewController alloc] initWithCallP2P:callNumber homeId:self.homeId isCallout:YES];
+    if (@available(iOS 13.0, *)) {
+        vc.modalPresentationStyle = UIModalPresentationFullScreen;
+    }
+    [self presentViewController:vc animated:YES completion:^{
+        self.callP2PBtn.userInteractionEnabled = YES;
+    }];
+}
+
 // 查看门禁的摄像头
 - (void)callDoorMonitor:(JXDoorDeviceModel *)doorDevice
 {
@@ -412,10 +485,7 @@ JXSecurityDelegate>
 {
     NSLog(@"name = %@", nvrDevice.subDeviceName);
     NSDate *date = [[NSDate date] dateBySubtractingDays:1];
-//    JX_NVRHistoryPlayViewController *vc = [[JX_NVRHistoryPlayViewController alloc] initWithNVRDevice:nvrDevice homeId:self.homeId startDate:[date theDayBeginDate] endDate:[date theDayEndDate]];
-//    [self.navigationController pushViewController:vc animated:YES];
-    
-    
+
     JX_NVRHistoryVideoController *vc = [[JX_NVRHistoryVideoController alloc] initWithNVRDevice:nvrDevice homeId:self.homeId startDate:[date theDayBeginDate] endDate:[date theDayEndDate]];
     if (@available(iOS 13.0, *)) {
         vc.modalPresentationStyle = UIModalPresentationFullScreen;
@@ -450,6 +520,7 @@ JXSecurityDelegate>
 /// 门禁设备列表改变
 - (void)updateDoorDevicesInHome:(NSString *)homeId
 {
+    self.canOpenDoor = NO;
     [self.doorDevices removeAllObjects];
     
     [self.doorDevices addObjectsFromArray:[[JXManager defaultManage].deviceManager getDoorDeviceInHome:self.homeId]];
@@ -480,7 +551,6 @@ JXSecurityDelegate>
     [self.extDevices addObjectsFromArray:[[JXManager defaultManage].deviceManager getExtDeviceInHome:self.homeId]];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
-
 
 
 

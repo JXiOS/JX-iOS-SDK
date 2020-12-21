@@ -32,6 +32,10 @@ NS_ASSUME_NONNULL_BEGIN
                             homeId:(NSString *)homeId;
 
 
+- (instancetype)initWithCallP2P:(NSString *)callNumber
+                         homeId:(NSString *)homeId
+                      isCallout:(BOOL)isCallout;
+
 
 @end
 
