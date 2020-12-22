@@ -187,7 +187,6 @@
 - (void)configSubviews
 {
     CGFloat sw = [UIScreen mainScreen].bounds.size.width;
-    CGFloat sh = [UIScreen mainScreen].bounds.size.height;
     
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.textColor = [UIColor whiteColor];
@@ -228,7 +227,7 @@
     self.mineLayer = [CATiledLayer layer];
     [self.mineLayerView.layer addSublayer:self.mineLayer];
     self.mineLayer.frame = CGRectMake(0, 0, 120, 90);
-    self.mineLayer.backgroundColor = [UIColor redColor].CGColor;
+    self.mineLayer.backgroundColor = [UIColor greenColor].CGColor;
     
     [self configBottomView];
     

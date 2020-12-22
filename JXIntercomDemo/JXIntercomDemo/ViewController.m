@@ -39,8 +39,8 @@
     self.versionLabel.text = [NSString stringWithFormat:@"SDK Version: %@", [JXManager version]];
     
     // 这里的参数需要填写
-//    self.userIdTF.text = @"xxx";
-//    self.aliasTF.text = @"xxx";
+    self.userTF.text = @"<#userId#>";
+    self.aliasTF.text = @"<#alias#>";
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

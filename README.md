@@ -289,7 +289,7 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务�
 首先是必须实现的方法:
 
 ```objective-c
-/// 有呼叫进来, 是否需要响应.
+/// 有呼叫进来, 是否需要响应. 
 - (BOOL)shouldResponseIntercomCall:(JX_IntercomScenes)callScenes;
 ```
 

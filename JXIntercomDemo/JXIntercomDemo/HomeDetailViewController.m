@@ -110,6 +110,9 @@ JXSecurityDelegate>
             make.height.mas_equalTo(30);
         }];
         
+        #warning TODO : 配置户户通房号
+//        self.p2pNumberTF.text = @"<#callNumber#>";
+        
         UIButton *callP2pBtn = [UIButton buttonWithType:UIButtonTypeSystem];
         [callP2pBtn setTitle:@"呼叫户户通" forState:UIControlStateNormal];
         [callP2pBtn setTitle:@"不支持户户通" forState:UIControlStateDisabled];
