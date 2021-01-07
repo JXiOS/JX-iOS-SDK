@@ -173,13 +173,27 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务�
 
 
 
-## 呼叫和查看监控[JXConnectingManager]
+## 设备的呼叫[JXConnectingManager]
 
-### 主动呼叫
+通过 `[[JXManager defaultManage].connectingManager` 可以处理设备的呼叫业务, 包含有户户通, 室内通, 门禁系统摄像头的查看. 每一个成功连接的会话都会用一个唯一的 sessionId 来标识, 相关业务处理如下:
 
-通过 `[[JXManager defaultManage].connectingManager` 可以处理主动呼出的情况,
+### 户户通呼叫
 
-这里每一个呼叫连接都会拥有一个唯一的 sessionId, 相关方法具体可以查看 demo 
+```objective-c
+/// 是否支持户户通通话
+- (BOOL)isSupportP2PInHome:(NSString *)homeId;
+
+/// 呼叫户户通
+/// @param homeId homeId
+/// @param callNumber 呼叫的房号
+/// @param delegate 会话相关的代理
+/// 返回的是会话的 sessionId, 如果是 nil, 表示呼叫失败.
+- (NSString * _Nullable)callP2POutWithHomeId:(NSString *)homeId
+                                  callNumber:(NSString *)callNumber
+                               videoDelegate:(id<JXConnectingDelegate>)delegate;
+```
+
+### 室内通呼叫
 
 ```objective-c
 /// 是否支持室内通通话
@@ -194,22 +208,11 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务�
                              callType:(JX_IntercomCallType)callType
                             extDevice:(JXExtDeviceModel *)extDevice
                         videoDelegate:(id<JXConnectingDelegate>)delegate;
+```
 
+### 门禁系统摄像头的查看
 
-/// 是否支持室内通通话
-- (BOOL)isSupportExtInHome:(NSString *)homeId;
-
-/// 呼叫室内通设备, 呼叫成功返回 sessionId, 呼叫失败返回 nil
-/// @param homeId homeId
-/// @param callType 区分是呼叫还是查看监控
-/// @param extDevice 室内通设备
-/// @param delegate 视频连接的代理
-- (NSString * _Nullable)callExtInHome:(NSString *)homeId
-                             callType:(JX_IntercomCallType)callType
-                            extDevice:(JXExtDeviceModel *)extDevice
-                        videoDelegate:(id<JXConnectingDelegate>)delegate;
-
-
+```objective-c
 /// 查看门禁系统摄像头
 /// @param homeId dockSn
 /// @param doorDevice KRDoorDeviceModel
@@ -218,8 +221,13 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务�
 - (NSString * _Nullable)callDoorMonitorInHome:(NSString *)homeId
                                        device:(JXDoorDeviceModel *)doorDevice
                                 videoDelegate:(id<JXConnectingDelegate>)delegate;
+```
 
 
+
+### 会话的公共方法
+
+```objective-c
 /// 主动接听, 不会有回调
 - (BOOL)pickUpInHome:(NSString *)homeId sessionId:(NSString *)sessionId;
 
@@ -258,7 +266,7 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务�
 
 
 
-遵循 `JXConnectingDelegate` 代理用来处理呼叫中的业务
+遵循 `JXConnectingDelegate` 代理来处理会话中的交互
 
 ```objective-c
 /// 视频连接被挂断
@@ -282,20 +290,23 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务�
 
 
 
-### 被呼叫
+### 被其他设备呼叫
 
-被呼叫的情况交由 `JXIntercomDelegate` 来处理,
-
-首先是必须实现的方法:
+我们将被呼叫的业务交由 `JXManager` 的  `JXIntercomDelegate` 来统一处理, 方便开发者管理此 SDK 的会话在整个 App 中的优先级. 要实现的方法如下:
 
 ```objective-c
-/// 有呼叫进来, 是否需要响应. 
+/*
+有呼叫进来, 是否需要响应. 
+
+返回 NO, 会向呼叫方响应当前用户正忙, 无法响应呼叫.
+返回 YES, 会区分通话场景触发响应的被呼回调.
+*/
 - (BOOL)shouldResponseIntercomCall:(JX_IntercomScenes)callScenes;
 ```
 
-在这里可以处理当前 App 是否可以响应被呼叫的情况, 如果返回 NO, 直接返回用户占线, 呼出方收到消息后可以直接挂断.
 
-如果返回 YES, 在下面两个方法中来处理两种被呼叫的情况:
+
+响应被呼叫: 
 
 ```objective-c
 /// 被门禁呼叫 (shouldResponseIntercomCall 返回 YES 的时候才会有)
@@ -318,8 +329,6 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务�
 ```
 
 
-
-具体可以查看 Demo 中的简单处理.
 
 
 
