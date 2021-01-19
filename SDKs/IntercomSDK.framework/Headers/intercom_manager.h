@@ -110,6 +110,9 @@ IntercomSmartHomeDelegateHolder *smarthome_delegate;
 //全局初始化，只需要调用一次，必须在调用其他任何方法之前初始化
 + (void)globalInitialize:(NSString *)app_conf;
 
+//get license info,return json
++ (NSString*)getActiveInfo;
+
 /**
  *启动门禁系统
  * system_id:系统唯一标示
@@ -128,6 +131,10 @@ intercom_conf:(NSString *)intercom_conf
  *才能将对象设置为nil
  */
 - (void)stop;
+
+- (void)active:(NSString*)appid
+        appkey:(NSString*)appkey
+    activecode:(NSString*)activecode;
 
 /**
  在收到AppUnInitialize callback之后才能destroy

@@ -32,7 +32,10 @@
     NSString *transitURL = @"<#transiturl#>";
     NSString *channel = @"<#channel#>";
     
-    JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:sipURL transitURLString:transitURL channel:channel];
+    NSString *appid = @"<#appId#>";
+    NSString *appkey = @"<#appKey#>";
+    
+    JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:sipURL transitURLString:transitURL channel:channel appId:appid appKey:appkey];
     
     [[JXManager defaultManage] startWithConfig:jxConfig];
     
@@ -64,24 +67,6 @@
         }];
     }
 }
-
-
-
-//#pragma mark - UISceneSession lifecycle
-//
-//
-//- (UISceneConfiguration *)application:(UIApplication *)application configurationForConnectingSceneSession:(UISceneSession *)connectingSceneSession options:(UISceneConnectionOptions *)options {
-//    // Called when a new scene session is being created.
-//    // Use this method to select a configuration to create the new scene with.
-//    return [[UISceneConfiguration alloc] initWithName:@"Default Configuration" sessionRole:connectingSceneSession.role];
-//}
-//
-//
-//- (void)application:(UIApplication *)application didDiscardSceneSessions:(NSSet<UISceneSession *> *)sceneSessions {
-//    // Called when the user discards a scene session.
-//    // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-//    // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
-//}
 
 
 @end

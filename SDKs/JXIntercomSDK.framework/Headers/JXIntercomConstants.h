@@ -147,7 +147,10 @@ typedef NS_ENUM(NSUInteger, JX_IntercomReason) {
     /// 被其他人接听
     JX_IntercomReason_PickupByOther,
     /// 设备掉线
-    JX_IntercomReason_DeviceOffLine
+    JX_IntercomReason_DeviceOffLine,
+    
+    /// 对方挂断会话
+    JX_IntercomReason_Hungup = 900,
 };
 
 

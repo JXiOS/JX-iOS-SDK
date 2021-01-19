@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <IntercomSDK/intercom_constants.h>
+#import <IntercomSDK/IntercomSDK.h>
 #import "JXIntercomConstants.h"
 
 @class SubDevice;

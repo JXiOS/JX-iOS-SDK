@@ -48,6 +48,13 @@ NS_ASSUME_NONNULL_BEGIN
                                                  callNumber:(NSString *)callNumber;
 
 
+/// 鉴权的结果
+/// @param result 参照 DeviceActiveResult 说明
+/// @param message message
+- (void)onDeviceActivated:(DeviceActiveResult)result message:(NSString * _Nullable)message;
+
+
+
 @end
 
 
@@ -83,9 +90,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 登录
 /// @param userId 移动端的账号,代表移动端的唯一值
 /// @param alias 用来显示的昵称. 传空值则默认为"iPhone"
+/// @param activecode 和 userId 绑定的激活码
 /// @param completeBlock 指示登录是否成功. 返回 YES 后才可以正常使用 SDK 中的功能. 否则可能发生异常
 - (void)loginWithUserId:(NSString *)userId
                   alias:(NSString *)alias
+             activecode:(NSString *)activecode
                complete:(void(^)(BOOL succeed))completeBlock;
 
 

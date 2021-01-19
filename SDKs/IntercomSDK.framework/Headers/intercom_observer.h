@@ -37,6 +37,10 @@
 
 - (void)onCameraStateChanged:(int)state;
 
+- (void)onDeviceActivated:(int)errcode
+                     type:(NSString *)type
+                  message:(NSString *)message;
+
 @end
 
 /** 创建一个新的门禁对象的回调事件，报告创建的结果
@@ -231,6 +235,10 @@
  camera start : 1 or stop: 0
  */
 - (void)onCameraStateChanged:(int)state;
+
+- (void)onDeviceActivated:(int)errcode
+                     type:(NSString *)type
+                  message:(NSString *)message;
 
 @end
 

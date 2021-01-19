@@ -1,3 +1,7 @@
+
+
+
+
 ## 概要介绍
 
 慧管家 SDK 兼容 iOS10.0, Demo 兼容 iOS10.0.
@@ -70,7 +74,13 @@
 在使用门禁功能之前需要先将配置项设置好: 
 
 ```objective-c
-JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务器地址" transitURLString:@"中转服务器地址" channel:@"客户标识"];
+NSString *sipURL = @"sip服务器地址";
+NSString *transitURL = @"中转服务器地址";
+NSString *channel = @"客户标识";
+NSString *appid = @"注册的 AppId";
+NSString *appkey = @"注册的 AppKey";
+
+JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:sipURL transitURLString:transitURL channel:channel appId:appid appKey:appkey];
 ```
 
 然后启动 `JXMananger` :
@@ -102,14 +112,27 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务�
 /// 登录
 /// @param userId 移动端的账号,代表移动端的唯一值
 /// @param alias 用来显示的昵称. 传空值则默认为"iPhone"
-/// @param completeBlock 指示登录是否成功. 返回 YES 后才可以正常使用 SDK 中的功能. 不要在 succeed = NO 的时候启动服务.
+/// @param activecode 和 userId 绑定的激活码
+/// @param completeBlock 指示登录是否成功. 返回 YES 后才可以正常使用 SDK 中的功能. 否则可能发生异常
 - (void)loginWithUserId:(NSString *)userId
                   alias:(NSString *)alias
+             activecode:(NSString *)activecode
                complete:(void(^)(BOOL succeed))completeBlock;
 
 /// 登出
 - (void)logout;
 ```
+
+鉴权的结果会在 `JXIntercomDelegate` 的方法中告知:
+
+```objective-c
+/// 鉴权的结果
+/// @param result 参照 DeviceActiveResult 说明
+/// @param message message
+- (void)onDeviceActivated:(DeviceActiveResult)result message:(NSString * _Nullable)message;
+```
+
+
 
 
 
@@ -403,4 +426,59 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:@"sip服务�
 ```
 
 
+
+
+
+
+
+
+
+## 更新说明
+
+### 2.0.66302
+
+新增设备激活, 需要在初始化 `JXManagerConfig` 的时候提供注册过的 `appId` 和  `appKey` .  在登录的时候提供和 `userId` 绑定的激活码 `activecode` , 如果该 `userId` 还未绑定过激活码, 请提供新的激活码. 登录过程会自动激活和验证. 
+
+变更的接口:
+
+JXManagerConfig:
+
+```objective-c
+/// 通过此方法初始化默认的 Config
+/// @param sipURLString sip服务地址
+/// @param transitURLString 中转服务地址
+/// @param channel 标识
+/// @param appId 授权的 Id
+/// @param appKey 授权的 Key
+- (instancetype)initWithSipURL:(NSString *)sipURLString
+              transitURLString:(NSString *)transitURLString
+                       channel:(NSString *)channel
+                         appId:(NSString *)appId
+                        appKey:(NSString *)appKey;
+```
+
+JXManager:
+
+```objective-c
+/// 登录
+/// @param userId 移动端的账号,代表移动端的唯一值
+/// @param alias 用来显示的昵称. 传空值则默认为"iPhone"
+/// @param activecode 和 userId 绑定的激活码
+/// @param completeBlock 指示登录是否成功. 返回 YES 后才可以正常使用 SDK 中的功能. 否则可能发生异常
+- (void)loginWithUserId:(NSString *)userId
+                  alias:(NSString *)alias
+             activecode:(NSString *)activecode
+               complete:(void(^)(BOOL succeed))completeBlock;
+```
+
+JXIntercomDelegate 新增回调告知激活结果:
+
+```objective-c
+/// 鉴权的结果
+/// @param result 参照 DeviceActiveResult 说明
+/// @param message message
+- (void)onDeviceActivated:(DeviceActiveResult)result message:(NSString * _Nullable)message;
+```
+
+若设备激活失败, 云端功能不开启, 但若和设备在同一局域网内, 相关服务依然可用; 激活成功, 所有功能可用.
 

@@ -13,6 +13,12 @@
 #import <JXIntercomSDK/JXIntercomSDK.h>
 #import "JXVideoViewController.h"
 
+#warning TestCode
+static NSString *const TestHomeId = @"";  /// homeId
+/// <---- TestCode
+
+
+
 @interface JXListViewController ()
 <UITableViewDelegate, UITableViewDataSource,
 JXIntercomDelegate>
@@ -156,9 +162,9 @@ JXIntercomDelegate>
         make.height.mas_equalTo(leftL.mas_height);
     }];
     
-    #warning TODO : NOT Finish - 配置 homeId
-    /// 这里可以填写可用的 homeId 参数
-//    self.homeIdTF.text = @"<#homeId#>";
+    if (TestHomeId && TestHomeId.length > 0) {
+        self.homeIdTF.text = TestHomeId;
+    }
     
     self.startButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [self.startButton setTitle:@"Start Server" forState:UIControlStateNormal];
@@ -253,6 +259,41 @@ JXIntercomDelegate>
     }
     [self presentViewController:vc animated:YES completion:nil];
     return vc;
+}
+
+
+
+- (void)onDeviceActivated:(DeviceActiveResult)result message:(NSString *)message
+{
+    if (result == DeviceActive_Success) {
+        NSLog(@"鉴权-成功");
+    }
+    else {
+        NSString *errorMessage = @"激活异常";
+        switch (result) {
+            case DeviceActive_ErrorLib:
+                errorMessage = @"SDK库有误";
+                break;
+            case DeviceActive_ErrorNet:
+                errorMessage = @"网络不通";
+                break;
+            case DeviceActive_CodeUsedInOtherDevice:
+                errorMessage = @"当前提供的激活码已经在其他设备上激活";
+                break;
+            case DeviceActive_Expired:
+                errorMessage = @"激活码已经过期";
+                break;
+            case DeviceActive_Invalid:
+                errorMessage = @"激活码无效";
+                break;
+            case DeviceActive_AlreadyActivated:
+                errorMessage = @"该设备已经使用其他激活码激活了";
+                break;
+            default:
+                break;
+        }
+        NSLog(@"鉴权-失败:%@", errorMessage);
+    }
 }
 
 @end

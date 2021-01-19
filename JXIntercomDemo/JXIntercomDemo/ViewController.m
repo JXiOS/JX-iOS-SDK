@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *userTF;
 
 @property (weak, nonatomic) IBOutlet UITextField *aliasTF;
+@property (weak, nonatomic) IBOutlet UITextField *codeTF;
 
 
 
@@ -41,6 +42,7 @@
     // 这里的参数需要填写
     self.userTF.text = @"<#userId#>";
     self.aliasTF.text = @"<#alias#>";
+    self.codeTF.text = @"<#activecode#>";
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -55,8 +57,9 @@
     if (self.isLogin == NO) {
         NSString *userId = self.userTF.text;
         NSString *alias = self.aliasTF.text;
+        NSString *code = self.codeTF.text;
         
-        [[JXManager defaultManage] loginWithUserId:userId alias:alias complete:^(BOOL succeed) {
+        [[JXManager defaultManage] loginWithUserId:userId alias:alias activecode:code complete:^(BOOL succeed) {
             if (succeed) {
                 JXListViewController *listVC = [[JXListViewController alloc] init];
                 [self.navigationController pushViewController:listVC animated:YES];

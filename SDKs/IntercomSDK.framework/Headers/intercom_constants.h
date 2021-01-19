@@ -84,6 +84,7 @@ typedef NS_ENUM(NSInteger, AppEvent) {
   AppUnInitialized,
   CameraStateChanged,
   CameraError,
+  DeviceActive,
 };
 
 typedef NS_ENUM(NSInteger, SipRegistrationState) {
@@ -125,6 +126,16 @@ typedef NS_ENUM(NSInteger, IntercomMessageResult) {
   IntercomMessageResultSipReasonNotAnswered,
   IntercomMessageResultSipReasonBusy,
   IntercomMessageResultSipReasonTimeout,
+};
+
+typedef NS_ENUM(NSInteger, DeviceActiveResult) {
+  DeviceActive_ErrorLib = -2, //SDK库有误
+  DeviceActive_ErrorNet = -1, //网络不通
+  DeviceActive_Success = 200, //激活成功
+  DeviceActive_CodeUsedInOtherDevice = 301, //当前提供的激活码已经在其他设备上激活
+  DeviceActive_Expired = 302, //激活码已经过期
+  DeviceActive_Invalid = 303, //激活码无效
+  DeviceActive_AlreadyActivated = 304 //该设备已经使用其他激活码激活了
 };
 
 extern NSString *const kAppScheme;
