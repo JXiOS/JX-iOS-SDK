@@ -282,30 +282,30 @@
 			isa = PBXGroup;
 			children = (
 				6AD4667D2455897D006C1562 /* MASCompositeConstraint.h */,
-				6AD4667E2455897D006C1562 /* NSLayoutConstraint+MASDebugAdditions.m */,
+				6AD4668B2455897D006C1562 /* MASCompositeConstraint.m */,
+				6AD466892455897D006C1562 /* MASConstraint.h */,
+				6AD466922455897D006C1562 /* MASConstraint.m */,
 				6AD4667F2455897D006C1562 /* MASConstraint+Private.h */,
-				6AD466802455897D006C1562 /* MASLayoutConstraint.h */,
-				6AD466812455897D006C1562 /* NSArray+MASShorthandAdditions.h */,
 				6AD466822455897D006C1562 /* MASConstraintMaker.h */,
-				6AD466832455897D006C1562 /* View+MASAdditions.h */,
-				6AD466842455897D006C1562 /* NSArray+MASAdditions.h */,
+				6AD4668C2455897D006C1562 /* MASConstraintMaker.m */,
+				6AD466802455897D006C1562 /* MASLayoutConstraint.h */,
+				6AD4668D2455897D006C1562 /* MASLayoutConstraint.m */,
+				6AD466912455897D006C1562 /* Masonry.h */,
 				6AD466852455897D006C1562 /* MASUtilities.h */,
 				6AD466862455897D006C1562 /* MASViewAttribute.h */,
-				6AD466872455897D006C1562 /* ViewController+MASAdditions.m */,
+				6AD466952455897D006C1562 /* MASViewAttribute.m */,
 				6AD466882455897D006C1562 /* MASViewConstraint.h */,
-				6AD466892455897D006C1562 /* MASConstraint.h */,
-				6AD4668A2455897D006C1562 /* NSLayoutConstraint+MASDebugAdditions.h */,
-				6AD4668B2455897D006C1562 /* MASCompositeConstraint.m */,
-				6AD4668C2455897D006C1562 /* MASConstraintMaker.m */,
-				6AD4668D2455897D006C1562 /* MASLayoutConstraint.m */,
+				6AD466942455897D006C1562 /* MASViewConstraint.m */,
+				6AD466842455897D006C1562 /* NSArray+MASAdditions.h */,
 				6AD4668E2455897D006C1562 /* NSArray+MASAdditions.m */,
+				6AD466812455897D006C1562 /* NSArray+MASShorthandAdditions.h */,
+				6AD4668A2455897D006C1562 /* NSLayoutConstraint+MASDebugAdditions.h */,
+				6AD4667E2455897D006C1562 /* NSLayoutConstraint+MASDebugAdditions.m */,
+				6AD466832455897D006C1562 /* View+MASAdditions.h */,
 				6AD4668F2455897D006C1562 /* View+MASAdditions.m */,
 				6AD466902455897D006C1562 /* View+MASShorthandAdditions.h */,
-				6AD466912455897D006C1562 /* Masonry.h */,
-				6AD466922455897D006C1562 /* MASConstraint.m */,
 				6AD466932455897D006C1562 /* ViewController+MASAdditions.h */,
-				6AD466942455897D006C1562 /* MASViewConstraint.m */,
-				6AD466952455897D006C1562 /* MASViewAttribute.m */,
+				6AD466872455897D006C1562 /* ViewController+MASAdditions.m */,
 			);
 			path = Masonry;
 			sourceTree = "<group>";
@@ -568,6 +568,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 928KSYA8FN;
 				ENABLE_BITCODE = NO;
@@ -584,10 +585,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0.0;
 				OTHER_LDFLAGS = "-Objc";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jingxi.JXIntercomDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Debug;
 		};
@@ -595,6 +598,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 928KSYA8FN;
 				ENABLE_BITCODE = NO;
@@ -611,10 +615,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0.0;
 				OTHER_LDFLAGS = "-Objc";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jingxi.JXIntercomDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Release;
 		};

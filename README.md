@@ -25,11 +25,13 @@
 
 在工程的 `Info.plist` 中设置好权限字段: 
 
-​	NSCameraUsageDescription
+​	NSCameraUsageDescription : 相机权限
 
-​	NSMicrophoneUsageDescription
+​	NSMicrophoneUsageDescription : 麦克风权限
 
-​	NSPhotoLibraryAddUsageDescription
+​	NSPhotoLibraryAddUsageDescription : 添加照片到相册的权限
+
+​    NSLocalNetworkUsageDescription : 通过局域网搜索到门禁设备 (iOS 14)
 
 ​	App Transport Security Settings -> Allow Arbitrary Loads : YES
 
@@ -436,6 +438,8 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:sipURL trans
 ## 更新说明
 
 ### 2.0.66302
+
+iOS 14 info.plist 新增 `NSLocalNetworkUsageDescription` 字段. 需要用户同意使用`本地网络`才可以发现局域网内的设备. 
 
 新增设备激活, 需要在初始化 `JXManagerConfig` 的时候提供注册过的 `appId` 和  `appKey` .  在登录的时候提供和 `userId` 绑定的激活码 `activecode` , 如果该 `userId` 还未绑定过激活码, 请提供新的激活码. 登录过程会自动激活和验证. 
 

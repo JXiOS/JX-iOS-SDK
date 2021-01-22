@@ -146,7 +146,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="京希 SDK" id="GgL-7p-PbU"/>
                     <connections>
-                        <outlet property="activeTF" destination="Ays-79-I2g" id="5db-pm-3ne"/>
                         <outlet property="aliasTF" destination="Scb-tI-M23" id="43T-w9-Gqc"/>
                         <outlet property="codeTF" destination="Ays-79-I2g" id="p21-xp-giL"/>
                         <outlet property="userTF" destination="zAI-w5-Ov5" id="rHG-aK-gcz"/>

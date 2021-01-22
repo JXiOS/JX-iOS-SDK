@@ -26,12 +26,10 @@
     // Override point for customization after application launch.
     
     /// 配置两个服务器地址
-    #warning TODO : 配置基本的参数
-    /// 测试
+#warning TODO : 配置基本的参数
     NSString *sipURL = @"<#sipurl#>";
     NSString *transitURL = @"<#transiturl#>";
     NSString *channel = @"<#channel#>";
-    
     NSString *appid = @"<#appId#>";
     NSString *appkey = @"<#appKey#>";
     
@@ -46,12 +44,20 @@
 
 - (void)requestAuth
 {
-    PHAuthorizationStatus authorizationStatus = [PHPhotoLibrary authorizationStatus];
-    if (authorizationStatus == PHAuthorizationStatusNotDetermined) {
-        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
-            NSLog(@"Photos Auth = %zd", status);
+    if (@available(iOS 14.0, *)) {
+        [PHPhotoLibrary requestAuthorizationForAccessLevel:PHAccessLevelAddOnly handler:^(PHAuthorizationStatus status) {
+            NSLog(@"Photos Add Auth = %zd", status);
         }];
     }
+    else {
+        PHAuthorizationStatus authorizationStatus = [PHPhotoLibrary authorizationStatus];
+        if (authorizationStatus == PHAuthorizationStatusNotDetermined) {
+            [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+                NSLog(@"Photos Auth = %zd", status);
+            }];
+        }
+    }
+    
     
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     if (authStatus == AVAuthorizationStatusNotDetermined) {

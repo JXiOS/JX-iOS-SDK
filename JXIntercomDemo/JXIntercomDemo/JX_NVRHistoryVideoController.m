@@ -84,8 +84,6 @@ static CGFloat const sliderLRM = 10.0f;
     self.videoLayer.frame = CGRectMake(0, 0, sw, vh);
     [self.videoView.layer addSublayer:self.videoLayer];
     
-    
-    
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     closeButton.backgroundColor = [UIColor clearColor];
     [closeButton setImage:[UIImage imageNamed:@"icons_back"] forState:UIControlStateNormal];
@@ -199,31 +197,6 @@ static CGFloat const sliderLRM = 10.0f;
         NSLog(@"查看 NVR 记录出错");
     }
 }
-
-//- (void)sliderValueChanged:(UISlider *)slider forEvent:(UIEvent *)event
-//{
-//    UITouch * touchEvent = [[event allTouches] anyObject];
-//    switch (touchEvent.phase) {
-//        case UITouchPhaseBegan:
-//        {
-//            slider.continuous = NO;
-//            break;
-//        }
-//        case UITouchPhaseEnded:
-//        {
-//            slider.continuous = YES;
-//            [self seek:ceil(slider.value)];
-//            break;
-//        }
-//        case UITouchPhaseCancelled:
-//        {
-//            slider.continuous = YES;
-//            break;
-//        }
-//        default:
-//            break;
-//    }
-//}
 
 - (void)seek:(NSInteger)npt
 {
