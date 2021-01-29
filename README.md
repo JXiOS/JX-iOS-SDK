@@ -437,7 +437,21 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:sipURL trans
 
 ## 更新说明
 
-### 2.0.66302
+### 2.0.66742 - 2021.01.29
+
+修正:
+
+- 扬声器和麦克风静音设置颠倒的问题
+
+优化:
+
+- 摄像头预览图片的显示优化
+
+
+
+
+
+### 2.0.66302 - 2021.01.19
 
 iOS 14 info.plist 新增 `NSLocalNetworkUsageDescription` 字段. 需要用户同意使用`本地网络`才可以发现局域网内的设备. 
 
