@@ -162,6 +162,7 @@ UIKIT_EXTERN NSString * const JX_ExtMessageKey_ClientID;
 UIKIT_EXTERN NSString * const JX_ExtMessageKey_Message;
 UIKIT_EXTERN NSString * const JX_ExtMessageKey_IsMonitor;
 UIKIT_EXTERN NSString * const JX_ExtMessageKey_isHandHangup;
+UIKIT_EXTERN NSString * const JX_ExtMessageKey_CallSession;
 
 /// NVR 查看记录用
 UIKIT_EXTERN NSString * const JX_NVRMessageKey_Starttime;
@@ -180,7 +181,17 @@ UIKIT_EXTERN NSString * const JX_MessageKey_Scheme;
 UIKIT_EXTERN NSString * const JX_MessageKey_Router;
 UIKIT_EXTERN NSString * const JX_MessageKey_Client;
 UIKIT_EXTERN NSString * const JX_MessageKey_Message;
+UIKIT_EXTERN NSString * const JX_MessageKey_Command;
 
+/// 自定义 message 中的 key
+UIKIT_EXTERN NSString * const JX_CustomMessageKey_Type;
+UIKIT_EXTERN NSString * const JX_CustomMessageKey_CallSession;
+UIKIT_EXTERN NSString * const JX_CustomMessageKey_Content;
+
+/// 自定义 message 的 type 值 : 通知消息
+UIKIT_EXTERN NSString * const JX_CustomMessageType_Call;
+/// 自定义 message 的 type 值 : 文本消息
+UIKIT_EXTERN NSString * const JX_CustomMessageType_Text;
 
 
 @interface JXIntercomConstants : NSObject

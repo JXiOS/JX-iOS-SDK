@@ -59,6 +59,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param endNpt 结束时间的偏移
 - (void)didReceiveNPT:(NSInteger)startNpt endNpt:(NSInteger)endNpt;
 
+
+/// 收到对方发送的消息
+/// @param message 消息内容
+/// @param sessionId 会话的 sessionId
+- (void)didReceiveMessage:(NSString *)message inSession:(NSString *)sessionId;
+
 @end
 
 
@@ -109,7 +115,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 更新视频的 layer
 - (void)updateVideoLayer:(CATiledLayer *)layer sessionId:(NSString *)sessionId homeId:(NSString *)homeId;
 
-
+/// 室内通和户户通会话内发送消息
+/// @param content 要发送的文本内容
+/// @param sessionId 会话的 sessionId
+- (BOOL)sendMessage:(NSString *)content inSession:(NSString *)sessionId;
 
 
 #pragma mark ---- 室内通 ----
@@ -170,22 +179,6 @@ NS_ASSUME_NONNULL_BEGIN
       sessionId:(NSString *)sessionId
       nvrDevice:(JXDoorDeviceModel *)nvrDevice
         starNpt:(NSInteger)startNpt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

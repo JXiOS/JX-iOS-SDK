@@ -10,6 +10,7 @@
 #import <JXIntercomSDK/JXIntercomSDK.h>
 #import "JXListViewController.h"
 #import "JXVideoViewController.h"
+#import "JX_DemoConfig.h"
 
 @import AVFoundation;
 
@@ -39,12 +40,9 @@
     
     self.versionLabel.text = [NSString stringWithFormat:@"SDK Version: %@", [JXManager version]];
     
-#warning TestCode
-    self.userTF.text = @"<#userId#>";
-    self.aliasTF.text = @"<#alias#>";
-    self.codeTF.text = @"<#activecode#>";
-/// <---- TestCode
-    
+    self.userTF.text = [JX_DemoConfig userId];
+    self.aliasTF.text = [JX_DemoConfig alias];
+    self.codeTF.text = [JX_DemoConfig activeCode];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

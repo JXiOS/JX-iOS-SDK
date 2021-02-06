@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *proxyId;
 
+/// 对方的 netClient
 @property (nonatomic, strong) NetClient *netClient;
 
 /// SubDevice.name

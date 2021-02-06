@@ -12,12 +12,7 @@
 #import "Masonry.h"
 #import <JXIntercomSDK/JXIntercomSDK.h>
 #import "JXVideoViewController.h"
-
-#warning TestCode
-static NSString *const TestHomeId = @"";  /// homeId
-/// <---- TestCode
-
-
+#import "JX_DemoConfig.h"
 
 @interface JXListViewController ()
 <UITableViewDelegate, UITableViewDataSource,
@@ -162,9 +157,7 @@ JXIntercomDelegate>
         make.height.mas_equalTo(leftL.mas_height);
     }];
     
-    if (TestHomeId && TestHomeId.length > 0) {
-        self.homeIdTF.text = TestHomeId;
-    }
+    self.homeIdTF.text = [JX_DemoConfig homeId];
     
     self.startButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [self.startButton setTitle:@"Start Server" forState:UIControlStateNormal];

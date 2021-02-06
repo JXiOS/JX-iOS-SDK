@@ -13,11 +13,7 @@
 #import "JXHistoryViewController.h"
 #import "JX_NVRHistoryVideoController.h"
 #import "NSDate+Utilities.h"
-
-
-#warning TestCode
-static NSString *const TestP2pNumber = @""; /// 户户通房号
-/// <---- TestCode
+#import "JX_DemoConfig.h"
 
 
 
@@ -117,10 +113,7 @@ JXSecurityDelegate>
             make.height.mas_equalTo(30);
         }];
         
-        
-        if (TestP2pNumber && TestP2pNumber.length > 0) {
-            self.p2pNumberTF.text = TestP2pNumber;
-        }
+        self.p2pNumberTF.text = [JX_DemoConfig callNumber];
         
         UIButton *callP2pBtn = [UIButton buttonWithType:UIButtonTypeSystem];
         [callP2pBtn setTitle:@"呼叫户户通" forState:UIControlStateNormal];

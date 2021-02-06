@@ -12,6 +12,7 @@
 		6A63095E2451893D00D0FEDA /* IntercomSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AD2A801245181E000F70439 /* IntercomSDK.framework */; };
 		6A63095F2451893D00D0FEDA /* IntercomSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6AD2A801245181E000F70439 /* IntercomSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6A63097A2452CFA400D0FEDA /* JXListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6309792452CFA400D0FEDA /* JXListViewController.m */; };
+		6A66D21A25CE8E24001152F6 /* JX_DemoConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A66D21925CE8E24001152F6 /* JX_DemoConfig.m */; };
 		6A7693B02498683A001A0FEB /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7693AE2498683A001A0FEB /* NSDate+Utilities.m */; };
 		6A7693BE2499F731001A0FEB /* JX_NVRHistoryVideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7693BA2499F730001A0FEB /* JX_NVRHistoryVideoController.m */; };
 		6A7693BF2499F731001A0FEB /* QiSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7693BD2499F731001A0FEB /* QiSlider.m */; };
@@ -84,6 +85,8 @@
 		6A226E1D25636A1C00F5DA41 /* JXIntercomSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JXIntercomSDK.framework; sourceTree = "<group>"; };
 		6A6309782452CFA400D0FEDA /* JXListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JXListViewController.h; sourceTree = "<group>"; };
 		6A6309792452CFA400D0FEDA /* JXListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JXListViewController.m; sourceTree = "<group>"; };
+		6A66D21825CE8E24001152F6 /* JX_DemoConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JX_DemoConfig.h; sourceTree = "<group>"; };
+		6A66D21925CE8E24001152F6 /* JX_DemoConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JX_DemoConfig.m; sourceTree = "<group>"; };
 		6A7693AE2498683A001A0FEB /* NSDate+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utilities.m"; sourceTree = "<group>"; };
 		6A7693AF2498683A001A0FEB /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utilities.h"; sourceTree = "<group>"; };
 		6A7693BA2499F730001A0FEB /* JX_NVRHistoryVideoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JX_NVRHistoryVideoController.m; sourceTree = "<group>"; };
@@ -228,6 +231,8 @@
 				6AD2A7FF245181E000F70439 /* SDKs */,
 				6A9D00312428ACE9000EEF39 /* AppDelegate.h */,
 				6A9D00322428ACE9000EEF39 /* AppDelegate.m */,
+				6A66D21825CE8E24001152F6 /* JX_DemoConfig.h */,
+				6A66D21925CE8E24001152F6 /* JX_DemoConfig.m */,
 				6A9D00372428ACE9000EEF39 /* ViewController.h */,
 				6A9D00382428ACE9000EEF39 /* ViewController.m */,
 				6A6309782452CFA400D0FEDA /* JXListViewController.h */,
@@ -410,6 +415,7 @@
 				6AD4667A24558561006C1562 /* HomeDetailViewController.m in Sources */,
 				6AD466992455897D006C1562 /* MASConstraintMaker.m in Sources */,
 				6AD466A624597083006C1562 /* JXVideoViewController.m in Sources */,
+				6A66D21A25CE8E24001152F6 /* JX_DemoConfig.m in Sources */,
 				6A63097A2452CFA400D0FEDA /* JXListViewController.m in Sources */,
 				6AD466972455897D006C1562 /* ViewController+MASAdditions.m in Sources */,
 				6AD466962455897D006C1562 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,

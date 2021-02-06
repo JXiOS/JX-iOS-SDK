@@ -10,6 +10,8 @@
 
 #import <JXIntercomSDK/JXIntercomSDK.h>
 
+#import "JX_DemoConfig.h"
+
 @import Photos;
 @import AVFoundation;
 
@@ -24,16 +26,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+
+#warning TODO : 在 JX_DemoConfig 中先配置相关参数
     
-    /// 配置两个服务器地址
-#warning TODO : 配置基本的参数
-    NSString *sipURL = @"<#sipurl#>";
-    NSString *transitURL = @"<#transiturl#>";
-    NSString *channel = @"<#channel#>";
-    NSString *appid = @"<#appId#>";
-    NSString *appkey = @"<#appKey#>";
-    
-    JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:sipURL transitURLString:transitURL channel:channel appId:appid appKey:appkey];
+    JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:[JX_DemoConfig sipURL] transitURLString:[JX_DemoConfig transitURL] channel:[JX_DemoConfig channel] appId:[JX_DemoConfig appid] appKey:[JX_DemoConfig appkey]];
     
     [[JXManager defaultManage] startWithConfig:jxConfig];
     

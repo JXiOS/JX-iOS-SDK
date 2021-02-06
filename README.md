@@ -287,6 +287,11 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:sipURL trans
 /// 停止录制视频
 - (void)stopRecordVideoInHome:(NSString *)homeId
                     sessionId:(NSString *)sessionId;
+
+/// 室内通和户户通会话内发送消息
+/// @param content 要发送的文本内容
+/// @param sessionId 会话的 sessionId
+- (BOOL)sendMessage:(NSString *)content inSession:(NSString *)sessionId;
 ```
 
 
@@ -311,6 +316,26 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:sipURL trans
 
 /// 开始录制视频
 - (void)didStartRecord;
+
+/// 结束录制视频
+- (void)didEndRecord;
+
+/// 视频流开始
+- (void)didVideoAppears;
+
+/// 视频尺寸改变
+- (void)didVideoSizeChangeNewWidth:(int)width newHeight:(int)height;
+
+/// 收到 NPT 播放偏移
+/// @param startNpt 相对于起始时间的偏移
+/// @param endNpt 结束时间的偏移
+- (void)didReceiveNPT:(NSInteger)startNpt endNpt:(NSInteger)endNpt;
+
+
+/// 收到对方发送的消息
+/// @param message 消息内容
+/// @param sessionId 会话的 sessionId
+- (void)didReceiveMessage:(NSString *)message inSession:(NSString *)sessionId;
 ```
 
 
@@ -436,6 +461,38 @@ JXManagerConfig *jxConfig = [[JXManagerConfig alloc] initWithSipURL:sipURL trans
 
 
 ## 更新说明
+
+### 2.0.66929 - 2021.02.06
+
+新增:
+
+- 在室内通和户户通通话中发送和接收自定义消息的接口.
+
+```objective-c
+/// 发送的接口在 JXConnectingManager 类中
+
+/// 室内通和户户通会话内发送消息
+/// @param content 要发送的文本内容
+/// @param sessionId 会话的 sessionId
+- (BOOL)sendMessage:(NSString *)content inSession:(NSString *)sessionId;
+```
+
+```objective-c
+/// 接收消息的接口在 JXConnectingDelegate 中
+
+/// 收到对方发送的消息
+/// @param message 消息内容
+/// @param sessionId 会话的 sessionId
+- (void)didReceiveMessage:(NSString *)message inSession:(NSString *)sessionId;
+```
+
+修正:
+
+- 修复已知的问题.
+
+
+
+
 
 ### 2.0.66742 - 2021.01.29
 

@@ -17,6 +17,9 @@
 
 @property (nonatomic, copy) NSString *homeId;
 
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *subTitleLabel;
+
 @property (nonatomic, assign) BOOL isCallout;
 
 @property (nonatomic, strong) JXDoorDeviceModel *doorDevice;
@@ -189,15 +192,63 @@
     CGFloat sw = [UIScreen mainScreen].bounds.size.width;
     
     UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.textColor = [UIColor blackColor];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont boldSystemFontOfSize:24];
     [self.view addSubview:titleLabel];
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(0);
-        make.top.mas_equalTo(@20);
+        make.top.mas_equalTo(@30);
+        make.left.mas_equalTo(@10);
         make.height.mas_equalTo(@40);
     }];
+    self.titleLabel = titleLabel;
+    switch (self.callScenes) {
+        case JX_IntercomScenes_Door:
+            titleLabel.text = @"门禁";
+            break;
+        case JX_IntercomScenes_Ext:
+            titleLabel.text = @"室内通";
+            break;
+        case JX_IntercomScenes_P2P:
+            titleLabel.text = @"户户通";
+            break;
+        default:
+            break;
+    }
+    
+    UILabel *subLabel = [[UILabel alloc] init];
+    subLabel.textColor = [UIColor blackColor];
+    subLabel.textAlignment = NSTextAlignmentCenter;
+    subLabel.font = [UIFont boldSystemFontOfSize:12];
+    [self.view addSubview:subLabel];
+    [subLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(0);
+        make.top.mas_equalTo(titleLabel.mas_bottom);
+        make.left.mas_equalTo(@10);
+        make.height.mas_equalTo(@20);
+    }];
+    self.subTitleLabel = subLabel;
+    if (self.sessionId) {
+        subLabel.text = self.sessionId;
+    }
+    
+    UIButton * sendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [sendBtn setTitle:@"发送消息:123456" forState:UIControlStateNormal];
+    [sendBtn setTitle:@"已发送" forState:UIControlStateDisabled];
+    [sendBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [sendBtn setTitleColor:[UIColor greenColor] forState:UIControlStateDisabled];
+    sendBtn.layer.borderWidth = 0.5;
+    sendBtn.layer.borderColor = [UIColor greenColor].CGColor;
+    sendBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+    [self.view addSubview:sendBtn];
+    [sendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(subLabel.mas_bottom);
+        make.centerX.mas_equalTo(@0);
+        make.height.mas_equalTo(@30);
+        make.width.mas_equalTo(@180);
+    }];
+    [sendBtn addTarget:self action:@selector(sendMessageAction:) forControlEvents:UIControlEventTouchUpInside];
     
     CGFloat layerH = sw * 3.0 / 4.0;
     self.layerView = [[UIView alloc] init];
@@ -374,6 +425,18 @@
 
 
 #pragma mark - ======== Actions ========
+- (void)sendMessageAction:(UIButton *)button
+{
+    BOOL result = [[JXManager defaultManage].connectingManager sendMessage:@"123456" inSession:self.sessionId];
+    if (result) {
+        NSLog(@"已发送消息!");
+        button.enabled = NO;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            button.enabled = YES;
+        });
+    }
+}
+
 - (void)pickup
 {
     if (self.player) {
@@ -505,6 +568,15 @@
 {
     NSLog(@"录制结束");
 }
+
+/// 收到对方发送的消息
+- (void)didReceiveMessage:(NSString *)message inSession:(NSString *)sessionId
+{
+    NSLog(@"收到对方发过来的自定义消息:%@ - [%@]", message, sessionId);
+    self.subTitleLabel.text = message;
+}
+
+
 
 - (BOOL)isFullScreen
 {
